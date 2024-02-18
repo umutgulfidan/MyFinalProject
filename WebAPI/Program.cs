@@ -24,9 +24,12 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory()).Conf
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddCors();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 //IoC
 //builder.Services.AddSingleton<IProductService,ProductManager>();
@@ -63,6 +66,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+//Cors
+app.UseCors(builder=> builder.WithOrigins("http://localhost:4200").AllowAnyHeader());
 
 app.UseHttpsRedirection();
 
